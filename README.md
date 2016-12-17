@@ -1,5 +1,5 @@
 [![Github All Releases] (https://img.shields.io/github/downloads/remonlam/docker-jira/total.svg?style=plastic)](https://github.com/remonlam/docker-jira)
-[![GitHub tag](https://img.shields.io/github/tag/strongloop/express.svg?style=plastic)](https://github.com/remonlam/docker-jira)
+[![GitHub tag](https://img.shields.io/github/tag/remonlam/docker-jira.svg?style=plastic)](https://github.com/remonlam/docker-jira)
 
 # Atlassian JIRA Core in a Docker container
 
