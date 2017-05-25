@@ -1,36 +1,69 @@
-[![Github All Releases] (https://img.shields.io/github/downloads/remonlam/docker-jira/total.svg?style=plastic)](https://github.com/remonlam/docker-jira)
-[![GitHub tag](https://img.shields.io/github/tag/remonlam/docker-jira.svg?style=plastic)](https://github.com/remonlam/docker-jira)
 
-# Atlassian JIRA Software in a Docker container
 
-This is a containerized installation of Atlassian JIRA Software with Docker, and it's a match made in heaven for us all to enjoy. The aim of this image is to keep the installation as straight forward as possible, but with a few Docker related twists. You can get started by clicking the appropriate link below and reading the documentation.
+# Atlassian Jira in a Docker container
 
-* [Atlassian JIRA Software](https://cptactionhank.github.io/docker-atlassian-jira)
-* [Atlassian JIRA Software](https://cptactionhank.github.io/docker-atlassian-jira-software)
-* [Atlassian JIRA Service Desk](https://cptactionhank.github.io/docker-atlassian-service-desk)
-* [Atlassian Confluence](https://cptactionhank.github.io/docker-atlassian-confluence)
+This is a containerized installation of Atlassian Jira with Docker.
+The aim of this image is to keep the installation easy and as straight forward as possible.
 
-If you want to help out, you can check out the contribution section further down.
+It's possible to clone this repo and build the image on you're own machine, but if you think that's a waste of time ;-) there's a Automated Build in the Docker Hub that's based on this repo.
 
-## I'm in the fast lane! Get me started
+* [Docker Hub - Automated Build](https://hub.docker.com/r/containerstack/jira/)
+* [Atlassian Jira latest build](https://confluence.atlassian.com/jirasoftware/jira-software-release-notes-776821069.html)
+* [Oracle MySQL Connector J latest build](http://dev.mysql.com/downloads/connector/j/)
+* [Atlassian Jira](https://www.atlassian.com/software/jira)
 
-To quickly get started running a JIRA Software instance, use the following command:
+## Versions
+Currently this repo have the following versions;
+* 7.3.6 (latest - not yet tested)
+* 7.2.6 (latest - tested)
+
+Go to [Branches](https://github.com/containerstack/docker-jira/branches) to see all different builds that are available.
+
+## Use the Automated Build image for a TEST deployment;
+
+To quickly get started running a Jira instance, use the following command:
 ```bash
-docker run --detach --publish 8080:8080 cptactionhank/atlassian-jira:latest
+docker run --detach \
+           --name jira \
+           --publish 8080:8080 \
+           containerstack/jira:latest
 ```
 
-Then simply navigate your preferred browser to `http://[dockerhost]:8080` and finish the configuration.
+Once the image has been downloaded and container is fully started (this could take a few minutes), browse to `http://[dockerhost]:8080` to finish the configuration and enter your trail/license key.
 
-## Contributions
+NOTE: It's not recommended to run Jira this way because it does NOT have persistent storage, once the container is removed everything is gone!!
 
-This image has been created with the best intentions and an expert understanding of docker, but it should not be expected to be flawless. Should you be in the position to do so, I request that you help support this repository with best-practices and other additions.
+### What does all these options do?;
+detach          runs the container in the background
+name            gives the container a more useful name
+publish         publish a port from the container to the outside world (docker node [outside] / container [inside])
 
-Travis CI and CircleCI has been configured to build the Dockerfile and run acceptance tests on the Atlassian JIRA Software image to ensure it is working.
 
-Travis CI has additionally been configured to automatically deploy new version branches when successfully building a new version of Atlassian JIRA Software in the `master` branch and serves as the base. Furthermore an `eap` branch has been setup to automatically build and commit updates to ensure this branch contains the latest version of Atlassian JIRA Software Early Access Program.
+## Use the Automated Build image for a PRODUCTION deployment;
 
-If you see out of date documentation, lack of tests, etc., you can help out by either
-- creating an issue and opening a discussion, or
-- sending a pull request with modifications (remember to read [contributing guide](https://github.com/cptactionhank/docker-atlassian-jira/blob/master/CONTRIBUTING.md) before.)
+In order to make sure that what ever you or you're team is creating in Jira is persistent even when the container is recreated it's useful to make the "/var/atlassian/Jira" directory persistent.
+```bash
+docker run --detach \
+           --name Jira \
+           --volume "/persistent/storage/atlassian/Jira:/var/atlassian/Jira" \
+           --env "CATALINA_OPTS= -Xms512m -Xmx4g" \
+           --publish 8080:8080 \
+           containerstack/Jira:latest
+```
 
-Continuous Integration and Continuous Delivery is made possible with the great services from [GitHub](https://github.com), [Travis CI](https://travis-ci.org/), and [CircleCI](https://circleci.com/) written in [Ruby](https://www.ruby-lang.org/), using [RSpec](http://rspec.info/), [Capybara](https://jnicklas.github.io/capybara/), and [PhantomJS](http://phantomjs.org/) frameworks.
+Once the image has been downloaded and container is fully started (this could take a few minutes), browse to `http://[dockerhost]:8080` to finish the configuration and enter your trail/license key.
+
+### What does all these options do?;
+| Option| Description|
+| :------------- |:-------------|
+|detach|*runs the container in the background*|
+|name|*gives the container a more useful name*|
+|volume|*maps a directory from the docker host inside the container*|
+|env|*sets environment variables (this case it's for setting the JVM minimum/maximum memory 512MB<->2GB)*|
+|publish|*publish a port from the container to the outside world (dockernode [outside] / container [inside])*|
+
+
+
+## Issues, PR's and discussion
+
+If you see an issues please create an [issue](https://github.com/containerstack/docker-jira/issues/new) or even better fix it and create an [PR](https://github.com/containerstack/docker-jira/pulls) :-)
