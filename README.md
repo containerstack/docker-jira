@@ -1,5 +1,3 @@
-
-
 # Atlassian Jira in a Docker container
 
 This is a containerized installation of Atlassian Jira with Docker.
