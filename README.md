@@ -12,8 +12,8 @@ It's possible to clone this repo and build the image on you're own machine, but 
 
 ## Versions
 Currently this repo have the following versions;
-* 7.6.5 (latest - not yet tested)
-* 7.3.6 (latest - tested)
+* 7.7.0 (latest - not yet tested)
+* 7.7.0 (latest - tested)
 
 Go to [Branches](https://github.com/containerstack/docker-jira/branches) to see all different builds that are available.
 
