@@ -5,7 +5,7 @@ MAINTAINER Remon Lam [remon@containerstack.io]
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 # Check Jira version @ https://confluence.atlassian.com/jirasoftware/jira-software-release-notes-776821069.html
-ENV JIRA_VERSION 7.9.2
+ENV JIRA_VERSION 7.10.0
 # Check Connector/J version @ http://dev.mysql.com/downloads/connector/j/ it should be 5.1.30, testing with latest release
 ENV MYSQL_CONJ_VERSION  5.1.42
 
