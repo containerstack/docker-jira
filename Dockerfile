@@ -1,5 +1,5 @@
 FROM openjdk:8
-MAINTAINER Remon Lam [remon@containerstack.io]
+LABEL maintainer="Remon Lam <remon@containerstack.io>"
 
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
